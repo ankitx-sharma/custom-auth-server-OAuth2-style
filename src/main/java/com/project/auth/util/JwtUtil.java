@@ -43,8 +43,4 @@ public class JwtUtil {
 				.parseSignedClaims(token)
 				.getPayload();
 	}
-	
-	public String extractUsername(String token) {
-		return parseAndValidate(token).getSubject();
-	}
 }
