@@ -1,17 +1,14 @@
 package com.project.auth.dto;
 
-public class TokenResponse {
+public class LoginResponse {
 	private String accessToken;
+	private String refreshToken;
 	
-	public TokenResponse(String accessToken) {
+	public LoginResponse(String accessToken, String refreshToken) {
 		this.accessToken = accessToken;
+		this.refreshToken = refreshToken;
 	}
 
-	public String getAccessToken() {
-		return accessToken;
-	}
-
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
-	}
+	public String getAccessToken() { return accessToken; }
+	public String getRefreshToken() { return refreshToken; }
 }
