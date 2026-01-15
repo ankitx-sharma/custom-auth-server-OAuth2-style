@@ -161,3 +161,135 @@ They are used to:
 - Detect token reuse and potential compromise
 
 Refresh token rotation is supported to enhance security.
+
+##
+
+### Cryptographic Design (Token Trust Boundary)
+
+#### Token Signing Strategy
+
+The system supports **asymmetric cryptographic signing**:
+
+- Private key is used to sign JWTs
+- Public key is used by external systems to verify JWTs
+- Private key never leaves the Authorization Server
+
+This design:
+
+- Avoids shared secrets
+- Enables safe verification by multiple consumers
+- Supports future scaling and key rotation
+
+#### JWKS (JSON Web Key Set)
+
+The system exposes a standard endpoint:
+
+```
+GET /.well-known/jwks.json
+```
+
+This endpoint publishes public signing keys and allows token verifiers to:
+
+- Retrieve active keys
+- Select the correct key via `kid`
+- Verify JWT signatures safely
+
+##
+
+### External API (Public Contract)
+
+#### Authentication Endpoints
+
+- `POST /auth/register`
+
+   Registers a new user
+
+- `POST /auth/login`
+
+   Authenticates a user and a client, returns:
+
+  - Access token (JWT)
+  - Refresh token
+
+- `POST /auth/refresh`
+
+   Exchanges a valid refresh token for:
+
+  - New access token
+  - New refresh token (if rotation is enabled)
+
+- `POST /auth/logout`
+
+   Revokes refresh token(s) and invalidates session
+
+##
+
+### Persistence Model
+
+#### Users
+
+- Persisted with hashed credentials
+- Independent of tokens
+
+#### Clients
+
+- Persisted configuration defining trust and permissions
+
+#### Refresh Tokens
+
+- Persisted with:
+  - Hash only (never raw value)
+  - Expiry timestamp
+  - Revocation status
+  - Rotation linkage (token family)
+
+This persistence is required even though access tokens are stateless.
+
+##
+
+### Non-Functional Requirements
+
+#### Security
+
+- Secure password hashing (BCrypt / Argon2)
+- Short-lived access tokens
+- Refresh token reuse detection
+- Client authentication enforcement
+- No plaintext secrets stored or logged
+
+Scalability
+
+- Stateless access token validation
+- No server-side session state per request
+- Horizontal scalability supported
+
+Maintainability
+
+- Clear separation of identity, token, and client concerns
+- Replaceable persistence layer (H2 → PostgreSQL)
+
+##
+
+### Implementation Boundaries
+
+#### Explicitly Not Implemented
+
+- OAuth authorization code flows
+- Browser redirects and SSO UX
+- Consent management
+- Resource Server authorization rules
+
+These are intentionally excluded to keep the project focused on core identity and token mechanics.
+
+##
+
+### Project Outcome
+
+This project demonstrates:
+
+- Clear separation of identity and application logic
+- Realistic Authorization Server responsibilities
+- Secure token lifecycle management
+- Industry-aligned identity architecture concepts
+
+It serves as a learning-focused yet architecturally correct foundation for understanding modern authentication systems.
