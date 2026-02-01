@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres-dev
+    shm_size: 128mb
+    environment:
+        POSTGRES_USER: authUser
+        POSTGRES_PASSWORD: secret
+        POSTGRES_DB: authDB
+    ports:
+        - 5432:5432
+    volumes:
+        - "auth_pgdata:/var/lib/postgresql/data"
+		
+volumes:
+    auth_pgdata:
