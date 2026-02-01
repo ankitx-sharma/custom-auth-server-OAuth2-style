@@ -25,8 +25,10 @@ spring:
       org.hibernate.SQL: info
       org.flyway: DEBUG
 
-jwt:
-  issuer: "jwt-auth-service"
-  secret-base64: "${JWT_SECRET_BASE64:}"
-  access-token-ttl-minutes: 5
+app:
+  jwt:
+    issuer: "${ISSUER:https://auth.local}"
+    audience: "${JWT_AUDIENCE:auth-api}"
+    secret-base64: "${JWT_SECRET_BASE64:}"
+    access-token-ttl-seconds: "${ACCESS_TOKEN_TTL_SECONDS:900}"
   refresh-token-ttl-days: 14

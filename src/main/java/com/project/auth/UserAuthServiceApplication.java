@@ -2,8 +2,12 @@ package com.project.auth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+
+import com.project.auth.config.JWTProperties;
 
 @SpringBootApplication
+@EnableConfigurationProperties(value = JWTProperties.class)
 public class UserAuthServiceApplication {
 
 	public static void main(String[] args) {
