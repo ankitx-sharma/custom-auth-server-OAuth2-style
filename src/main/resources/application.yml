@@ -1,6 +1,29 @@
+server:
+  port: 8080
+
 spring:
   application:
     name: "auth"
+  datasource:
+    url: "${DB_URL}"
+    username: "${DB_USER}"
+    password: "${DB_PASSWORD}"
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+
+  flyway:
+    enabled: true
+
+  logging:
+    level:
+      org.hibernate.SQL: info
+      org.flyway: DEBUG
 
 jwt:
   issuer: "jwt-auth-service"

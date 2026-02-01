@@ -4,5 +4,5 @@
 .project
 target/
 
-#Secret Key generator class
-src/main/java/com/project/auth/util/SecretKeyGenerator.java
+#configuration file
+.env
