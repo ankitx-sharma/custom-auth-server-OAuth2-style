@@ -8,14 +8,33 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * Spring Security configuration for the application.
+ */
 @Configuration
 public class SecurityConfig {
 
+	/**
+	 * Provides a {@link PasswordEncoder} bean using BCrypt hashing.
+	 * 
+	 * @return a {@link BCryptPasswordEncoder} instance
+	 */
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	
+	/**
+	 * Configures the main Spring Security filter chain.
+	 * 
+	 *<ul>
+	 *  <li>{@code /api/.well-known/jwks.json} – JWKS endpoint for JWT verification</li>
+	 *</ul>
+	 *
+	 * @param http the {@link HttpSecurity} to configure
+	 * @return the configured {@link SecurityFilterChain}
+	 * @throws Exception if a security configuration error occurs
+	 */
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		return http.securityMatcher("/**")
