@@ -41,7 +41,7 @@ public class SecurityConfig {
 				.csrf(csrf -> csrf.disable())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(request -> 
-					request.requestMatchers("/api/.well-known/jwks.json", "/debug/token").permitAll()
+					request.requestMatchers("/api/.well-known/jwks.json", "/api/oauth2/token").permitAll()
 					.anyRequest().authenticated())
 				.build();
 	}

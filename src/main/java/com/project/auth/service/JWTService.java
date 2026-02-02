@@ -1,4 +1,4 @@
-package com.project.auth.tokens;
+package com.project.auth.service;
 
 import java.time.Instant;
 import java.util.Date;
