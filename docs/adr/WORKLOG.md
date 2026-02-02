@@ -1,5 +1,10 @@
 # Work Log – Auth Server
 
+## Bean for PasswordEncoder (SecurityConfig)
+
+This class introduces a bean of BCryptPasswordEncoder in the Spring Container
+- PasswordEncoder (BCryptPasswordEncoder)
+
 ## Implemented the KeyManager (RsaKeyManager)
 
 This class is responsible for generating RSA Key Pair
