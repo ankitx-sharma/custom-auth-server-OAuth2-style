@@ -1,6 +1,5 @@
 package com.project.auth.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nimbusds.jose.jwk.JWKSet;
 import com.project.auth.keys.RsaKeyManager;
-import com.project.auth.tokens.JWTService;
 
 /**
  * REST controller exposing JWT-related endpoints.
@@ -27,9 +25,6 @@ public class JwksController {
 	
 	@Autowired
 	private RsaKeyManager keyManager;
-	
-	@Autowired
-	private JWTService jwtService;
 
 	/**
 	 * Exposes the JSON Web Key Set (JWKS).
@@ -50,10 +45,5 @@ public class JwksController {
 	public Map<String,Object> jwks() {
 		JWKSet keySet = new JWKSet(keyManager.getActivePublicJwk());
 		return keySet.toJSONObject();
-	}
-	
-	@GetMapping("/debug/token")
-	public String test() {
-		return jwtService.issueAccessToken("userId", List.of("read", "write"));
 	}
 }
