@@ -7,12 +7,6 @@ Accepted
 The Authorization Server issues access tokens that must be validated by one or more
 Resource Servers.
 
-The system must support:
-- Independent token validation by Resource Servers
-- No sharing of private secrets between services
-- Future key rotation without invalidating all active tokens
-- Compatibility with standard JWT libraries
-
 ## Decision
 Use asymmetric JWT signing with **RS256** and publish public keys via a **JWKS endpoint**.
 
@@ -38,3 +32,4 @@ Use asymmetric JWT signing with **RS256** and publish public keys via a **JWKS e
 ## Related documents:
 - [README](../../README.md)
 - [DESIGN.md](../../DESIGN.md)
+
