@@ -62,7 +62,7 @@ Resource Server(s) validate JWT
 - Java + Spring Boot
 - Spring Security
 - PostgreSQL
-- Flyway/Liquibase
+- Flyway
 - Redis (rate limiting)
 - Docker / Docker Compose
 
