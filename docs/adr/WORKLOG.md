@@ -16,3 +16,7 @@ This class is responsible for creating new tokens by following below steps:
 ## Expose the Public Key (JwksController)
 
 - Expose the api (/auth/api/.well-known/jwks.json)
+
+## Make the API endpoints callable (SecurityConfig)
+
+This class updates the SecurityFilterChain to allow the configured endpoints
