@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: "auth"
+    name: "custom-auth-server"
   datasource:
     url: "${DB_URL}"
     username: "${DB_USER}"
@@ -22,8 +22,10 @@ spring:
 
   logging:
     level:
-      org.hibernate.SQL: info
+      root: INFO
+      org.hibernate.SQL: INFO
       org.flyway: DEBUG
+    config: classpath:logback-spring.xml
 
 app:
   jwt:

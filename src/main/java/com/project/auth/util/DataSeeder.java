@@ -26,7 +26,7 @@ public class DataSeeder {
 			}
 			
 			//Seed client
-			if(clients.existsByClientId("my-client")) {
+			if(!clients.existsByClientId("my-client")) {
 				ClientEntity client = new ClientEntity();
 				client.setClientId("my-client");
 				client.setSecretHash(encoder.encode("my-client"));

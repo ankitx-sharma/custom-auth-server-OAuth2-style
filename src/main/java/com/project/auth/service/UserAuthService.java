@@ -29,7 +29,7 @@ public class UserAuthService {
 		}
 		
 		UserEntity user = userRepo.findByEmail(username).orElseThrow(() -> {
-			throw new OAuthErrorException(HttpStatus.BAD_REQUEST, INVALID_GRANT, "Invalid credentials");
+			throw new OAuthErrorException(HttpStatus.BAD_REQUEST, INVALID_GRANT, "Invalid credentials or User does not exist");
 		});
 		
 		if(!user.isEnabled()) {
@@ -40,8 +40,8 @@ public class UserAuthService {
 			throw new OAuthErrorException(HttpStatus.BAD_REQUEST, INVALID_GRANT, "User temporarily locked");
 		}
 		
-		if(encoder.matches(password, user.getPasswordHash())) {
-			throw new OAuthErrorException(HttpStatus.BAD_REQUEST, INVALID_GRANT, "Invalid credentials");
+		if(!encoder.matches(password, user.getPasswordHash())) {
+			throw new OAuthErrorException(HttpStatus.BAD_REQUEST, INVALID_GRANT, "Invalid User credentials");
 		}
 		
 		return user;

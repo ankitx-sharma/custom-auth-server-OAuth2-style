@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+	<!-- Expose Spring Boot properties -->
+	<springProperty scope="context" name="APP_NAME" source="spring.application.name" defaultValue="custom-auth-server" />
+	<springProperty scope="context" name="LOG_LEVEL_ROOT" source="LOG_LEVEL_ROOT" defaultValue="INFO" />
+	
+	<property name="PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} requestId=%X{requestId} - %msg%n" />
+	
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${PATTERN}</pattern>
+		</encoder>
+	</appender>
+	
+	<logger name="audit" level="INFO" />
+	<logger name="org.hibernate.SQL" level="WARN" />
+	<logger name="org.hibernate.type.description.sql" level="WARN" />
+	
+	<root level="${LOG_LEVEL_ROOT}">
+		<appender-ref ref="CONSOLE" />
+	</root>
+</configuration>
