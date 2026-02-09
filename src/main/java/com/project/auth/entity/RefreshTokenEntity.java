@@ -1,6 +1,5 @@
 package com.project.auth.entity;
 
-import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -42,7 +41,7 @@ public class RefreshTokenEntity {
 	private Instant issuedAt = Instant.now();
 	
 	@Column(name = "expires_at", nullable = false)
-	private Timestamp expiresAt;
+	private Instant expiresAt;
 	
 	@Column(name = "revoked_at")
 	private Instant revokedAt;
@@ -103,11 +102,11 @@ public class RefreshTokenEntity {
 		this.issuedAt = issuedAt;
 	}
 
-	public Timestamp getExpiresAt() {
+	public Instant getExpiresAt() {
 		return expiresAt;
 	}
 
-	public void setExpiresAt(Timestamp expiresAt) {
+	public void setExpiresAt(Instant expiresAt) {
 		this.expiresAt = expiresAt;
 	}
 

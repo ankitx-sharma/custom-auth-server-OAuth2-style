@@ -10,6 +10,8 @@ import com.project.auth.dto.TokenRequest;
 import com.project.auth.dto.TokenResponse;
 import com.project.auth.service.TokenService;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @RestController
 public class TokenController {
 	
@@ -20,7 +22,11 @@ public class TokenController {
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public TokenResponse issueAccessToken(
-			@RequestBody TokenRequest request) {
-		return tokenService.authenticate(request);
+			@RequestBody TokenRequest arguments,
+			             HttpServletRequest request) {
+		String userAgent = request.getHeader("User-Agent");
+		String ip = request.getRemoteAddr();
+		
+		return tokenService.authenticate(arguments, userAgent, ip);
 	}
 }

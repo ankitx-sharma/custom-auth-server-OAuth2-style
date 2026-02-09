@@ -22,4 +22,13 @@ public class OAuthErrorHandler {
 						"error_description", ex.getDescription())
 				);
 	}
+	
+	@ExceptionHandler(RefreshTokenException.class)
+	public ResponseEntity<Map<String, Object>> handleRefresh(RefreshTokenException ex) {
+		return ResponseEntity.badRequest()
+				.body(Map.of(
+						"error", ex.getError(), 
+						"error_description", ex.getDescription())
+				);
+	}
 }

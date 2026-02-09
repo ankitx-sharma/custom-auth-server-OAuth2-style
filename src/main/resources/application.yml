@@ -34,3 +34,6 @@ app:
     secret-base64: "${JWT_SECRET_BASE64:}"
     access-token-ttl-seconds: "${ACCESS_TOKEN_TTL_SECONDS:900}"
   refresh-token-ttl-days: 14
+  refresh:
+    pepper: "${REFRESH_TOKEN_PEPPER:change-me}"
+
