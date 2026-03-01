@@ -8,6 +8,10 @@ spring:
     url: "${DB_URL}"
     username: "${DB_USER}"
     password: "${DB_PASSWORD}"
+  data:
+    redis:
+      host: "${REDIS_HOST:localhost}"
+      port: "${REDIS_PORT:6379}"
 
   jpa:
     hibernate:
@@ -36,4 +40,13 @@ app:
   refresh-token-ttl-days: 14
   refresh:
     pepper: "${REFRESH_TOKEN_PEPPER:change-me}"
+  abuse:
+    rate-limit:
+      token-endpoint:
+        window-seconds: 60
+        max-requests: 30
+    lockout:
+      window-seconds: 600 # 10 minutes
+      max-failures: 5
+      lock-minutes: 15
 
